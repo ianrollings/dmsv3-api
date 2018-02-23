@@ -1,3 +1,4 @@
 /node_modules
 /dmsv3-api.sublime-*
 /package-lock.json
+*.DS_store*
