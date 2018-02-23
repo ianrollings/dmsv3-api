@@ -48,7 +48,8 @@ router.post("/", (req, res, next) => {
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         birthdate: req.body.birthdate,
-        gender: req.body.gender
+        gender: req.body.gender,
+        email: req.body.email
     });
     athlete
         .save()
