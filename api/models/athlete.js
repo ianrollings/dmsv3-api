@@ -7,7 +7,7 @@ const athleteSchema = mongoose.Schema({
     gender: { type: String, required: true },
     email: { type: String },
     created: { type: Date, default: Date.now },
-    modified: { type: Date }
+    modified: { type: Date, default: Date.now  }
 });
 
 module.exports = mongoose.model('Athlete', athleteSchema);

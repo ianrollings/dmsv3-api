@@ -82,7 +82,7 @@ router.post("/", (req, res, next) => {
 router.get('/:athleteId', (req, res, next) => {
     const id = req.params.athleteId;
     Athlete.findById(id)
-        .select('_id name birthdate gender created modified')
+        .select('_id name birthdate gender email created modified')
         .exec()
         .then(doc => {
             console.log("From database", doc);
@@ -106,15 +106,15 @@ router.patch('/:athleteId', (req, res, next) => {
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
-    updateOps['modified'] = Date.now();
+    //updateOps['modified'] = Date.now();
     Athlete.update({ _id: id }, { $set: updateOps })
         .exec()
         .then(result => {
-            console.log(result);
-            res.status(200).json(result);
+            res.status(200).json({
+                message: "Updated Athlete Successfully"
+            });
         })
         .catch(err => {
-            console.log(err);
             res.status(500).json({
                 error: err
             });
@@ -127,7 +127,7 @@ router.delete('/:athleteId', (req, res, next) => {
         .exec()
         .then(result => {
             res.status(200).json({
-                message: "Athlete deleted successfully"
+                message: "Deleted Athlete Successfully"
             });
         })
         .catch(err => {
