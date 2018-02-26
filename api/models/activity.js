@@ -5,7 +5,7 @@ const activitySchema = mongoose.Schema({
     type: { type: Number },
     date: { type: Date },
     athletes: [{
-    	_id: { type: String },
+    	_id: { type: mongoose.Schema.Types.ObjectId },
     }],
     created: { type: Date, default: Date.now },
     modified: { type: Date, default: Date.now  }
