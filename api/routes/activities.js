@@ -6,7 +6,7 @@ const Activity = require('../models/activity');
 
 router.get('/', (req, res, next) => {
     Activity.find()
-        //.select('name age _id bithdate gender')
+        //.select('')
         .exec()
         .then(docs => {
             const response = {
@@ -41,11 +41,6 @@ router.get('/', (req, res, next) => {
 
 
 router.post("/", (req, res, next) => {
-    const listAthletes = {};
-    for (const athlete of req.body.athletes) {
-        listAthletes[athlete._id] = athlete.value;
-    }
-
     const activity = new Activity({
         _id: new mongoose.Types.ObjectId(),
         type: req.body.type,
