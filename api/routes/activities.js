@@ -41,14 +41,17 @@ router.get('/', (req, res, next) => {
 
 
 router.post("/", (req, res, next) => {
+    const listAthletes = {};
+    for (const athlete of req.body.athletes) {
+        listAthletes[athlete._id] = athlete.value;
+    }
+
     const activity = new Activity({
         _id: new mongoose.Types.ObjectId(),
         type: req.body.type,
         date: req.body.date,
-/*        athletes: {
-            _id: req.body._id
-        }
-*/    });
+        athletes: req.body.athletes
+   });
     activity
         .save()
         .then(result => {
@@ -57,6 +60,9 @@ router.post("/", (req, res, next) => {
                 message: "Created Activity Successfully",
                 createdActivity: {
                         _id: result._id,
+                        type: req.body.type,
+                        date: req.body.date,                       
+                        athletes: req.body.athletes,
                         request: {
                             type: 'GET',
                             url: 'http://localhost:3000/activities/' + result._id
